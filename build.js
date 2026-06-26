@@ -13,12 +13,30 @@ if (version) {
 
 console.log('Building with domain:', domain)
 
-esbuild.build({
+const config = {
   entryPoints: ['index.ts'],
-  outfile: 'index.js',
   minify: true,
   define: {
     'process.env.DOMAIN': JSON.stringify(domain),
+  }
+}
+
+// ESM
+esbuild.build({
+  ...config,
+  outfile: 'index.js',
+  format: 'esm',
+}).catch(() => process.exit(1))
+
+// IIFE for HTML
+esbuild.build({
+  ...config,
+  outfile: 'index.global.js',
+  format: 'iife',
+  globalName: 'MonetagSDK',
+  bundle: true,
+  footer: {
+    js: 'window.createAdHandler = MonetagSDK.default;'
   }
 }).catch(() => process.exit(1))
 

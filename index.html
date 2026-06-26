@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monetag TG SDK HTML Example</title>
+    <script src="index.global.js"></script>
+</head>
+<body>
+    <h1>Monetag TG SDK HTML Integration</h1>
+    <p>Balance: <span id="balance">0</span></p>
+    <button id="showAd">Get reward for watching ad</button>
+
+    <script>
+        // Initialize the ad handler with your zone ID
+        const adHandler = createAdHandler(11196240);
+
+        let balance = 0;
+        const balanceElement = document.getElementById('balance');
+        const showAdButton = document.getElementById('showAd');
+
+        showAdButton.addEventListener('click', () => {
+            adHandler().then(() => {
+                balance++;
+                balanceElement.innerText = balance;
+            }).catch((error) => {
+                console.error('Ad failed to show:', error);
+                alert('Failed to load ad. Please try again later.');
+            });
+        });
+    </script>
+</body>
+</html>
