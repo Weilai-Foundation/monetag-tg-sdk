@@ -7,6 +7,21 @@ Alternatively, you can just add the following script tag to your HTML:
 <script src='//libtl.com/sdk.js' data-zone='11196240' data-sdk='show_11196240'></script>
 ```
 
+### HTML Integration
+
+If you want to use this package in a plain HTML environment, you can include `index.global.js` in your HTML file. This file provides the `MonetagSDK` global object.
+
+```html
+<script src="node_modules/monetag-tg-sdk/index.global.js"></script>
+<script>
+    const adHandler = createAdHandler(11196240);
+
+    adHandler().then(() => {
+        console.log('Ad watched!');
+    });
+</script>
+```
+
 In the examples below the code is for React applications, however, this package can be used for applications using other libraries and frameworks as well.
 
 ### Rewarded Interstitial
