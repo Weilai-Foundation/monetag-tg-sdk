@@ -1,7 +1,7 @@
 const ERR_NO_DOCUMENT = 'monetag-tg-sdk only supports the browser environment'
 const ERR_SCRIPT_LOAD = 'Error communicating with the ad server'
 
-const SCRIPT_URL = ['/', process.env.DOMAIN, 'sdk.js'].join('/')
+const SCRIPT_URL = ['//', process.env.DOMAIN, '/sdk.js'].join('')
 const MOUNT = typeof document !== 'undefined' ? document.body || document.documentElement : null
 const HANDLERS = {}
 

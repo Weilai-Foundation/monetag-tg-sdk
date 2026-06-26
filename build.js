@@ -2,7 +2,7 @@ import esbuild from 'esbuild'
 import fs from 'fs'
 
 const version = process.env.VERSION || '1.0.0'
-const domain = process.env.DOMAIN || 'yoszi.com'
+const domain = process.env.DOMAIN || 'libtl.com'
 
 console.log('Buidling version:', version)
 console.log('Building with domain:', domain)
