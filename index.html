@@ -5,11 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monetag TG SDK HTML Example</title>
     <script src="index.global.js"></script>
+    <style>
+        body { font-family: sans-serif; padding: 20px; line-height: 1.6; }
+        .container { max-width: 600px; margin: 0 auto; }
+        .section { margin-bottom: 30px; border: 1px solid #ccc; padding: 15px; border-radius: 8px; }
+        button { padding: 10px 15px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 4px; }
+        button:hover { background: #0056b3; }
+        .balance { font-weight: bold; font-size: 1.2em; }
+    </style>
 </head>
 <body>
-    <h1>Monetag TG SDK HTML Integration</h1>
-    <p>Balance: <span id="balance">0</span></p>
-    <button id="showAd">Get reward for watching ad</button>
+    <div class="container">
+        <h1>Monetag TG SDK Integration</h1>
+
+        <div class="section">
+            <h2>Current Balance</h2>
+            <p>Balance: <span id="balance" class="balance">0</span></p>
+        </div>
+
+        <div class="section">
+            <h2>Rewarded Interstitial</h2>
+            <p>Show a full-screen rewarded ad.</p>
+            <button id="showInterstitial">Show Rewarded Interstitial</button>
+        </div>
+
+        <div class="section">
+            <h2>Rewarded Pop</h2>
+            <p>Show a rewarded pop-up ad.</p>
+            <button id="showPop">Show Rewarded Pop</button>
+        </div>
+
+        <div class="section">
+            <h2>In-App Interstitial</h2>
+            <p>Enable automatic In-App ads with capping and frequency settings.</p>
+            <button id="enableInApp">Enable In-App Interstitial</button>
+        </div>
+    </div>
 
     <script>
         // Initialize the ad handler with your zone ID
@@ -17,16 +48,44 @@
 
         let balance = 0;
         const balanceElement = document.getElementById('balance');
-        const showAdButton = document.getElementById('showAd');
 
-        showAdButton.addEventListener('click', () => {
+        function updateBalance() {
+            balance++;
+            balanceElement.innerText = balance;
+        }
+
+        // Rewarded Interstitial
+        document.getElementById('showInterstitial').addEventListener('click', () => {
             adHandler().then(() => {
-                balance++;
-                balanceElement.innerText = balance;
+                console.log('Interstitial ad watched!');
+                updateBalance();
             }).catch((error) => {
-                console.error('Ad failed to show:', error);
-                alert('Failed to load ad. Please try again later.');
+                console.error('Interstitial failed:', error);
             });
+        });
+
+        // Rewarded Pop
+        document.getElementById('showPop').addEventListener('click', () => {
+            adHandler('pop').then(() => {
+                console.log('Pop ad watched!');
+                updateBalance();
+            }).catch((error) => {
+                console.error('Pop failed:', error);
+            });
+        });
+
+        // In-App Interstitial
+        document.getElementById('enableInApp').addEventListener('click', () => {
+            adHandler({
+                type: 'inApp',
+                inAppSettings: {
+                    frequency: 3,
+                    capping: 0.5,
+                    interval: 30,
+                    timeout: 10,
+                },
+            });
+            alert('In-App ads enabled! They will show automatically based on settings.');
         });
     </script>
 </body>
