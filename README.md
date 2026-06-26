@@ -2,7 +2,12 @@
 
 You can use this package to display ads in your Telegram Mini-App. Rewarded Interstitial, Rewarded Pop, In-App Interstitial formats are supported. To use it, all you need is a Rewarded Interstitial zone ID.
 
-In the examples the code is for React applications, however, this package can be used for applications using other libraries and frameworks as well.
+Alternatively, you can just add the following script tag to your HTML:
+```html
+<script src='//libtl.com/sdk.js' data-zone='11196240' data-sdk='show_11196240'></script>
+```
+
+In the examples below the code is for React applications, however, this package can be used for applications using other libraries and frameworks as well.
 
 ### Rewarded Interstitial
 
@@ -12,7 +17,7 @@ To show Rewarded Interstitial, you need to call `adHandler`, which is returned f
 import React from 'react'
 import createAdHandler from 'monetag-tg-sdk'
 
-const adHandler = createAdHandler(REWARDED_INTERSTITIAL_ZONE_ID)
+const adHandler = createAdHandler(11196240)
 
 function RewardComponent () {
     const [balance, setBalance] = React.useState(0)
@@ -40,7 +45,7 @@ To show Rewarded Pop, you need to call `adHandler` with the `'pop'` parameter, w
 import React from 'react'
 import createAdHandler from 'monetag-tg-sdk'
 
-const adHandler = createAdHandler(REWARDED_INTERSTITIAL_ZONE_ID)
+const adHandler = createAdHandler(11196240)
 
 function RewardComponent () {
     const [balance, setBalance] = React.useState(0)
@@ -67,7 +72,7 @@ To enable the In-App Interstitial mechanism you need to call `adHandler` with se
 ```jsx
 import createAdHandler from 'monetag-tg-sdk'
 
-const adHandler = createAdHandler(REWARDED_INTERSTITIAL_ZONE_ID)
+const adHandler = createAdHandler(11196240)
 
 adHandler({
     type: 'inApp',
